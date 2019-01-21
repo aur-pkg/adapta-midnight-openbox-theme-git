@@ -1,7 +1,7 @@
 # Maintainer: Nicholas Atkins <nbatkins@gmail.com>
 
 pkgname=adapta-midnight-openbox-theme-git
-pkgver=3.95.0.1
+pkgver=0.00.0.1
 
 pkgrel=1
 pkgdesc='An adaptive Gtk+ theme based on Material Design Guidelines'
@@ -44,9 +44,6 @@ package() {
   cd adapta-midnight
 
   make DESTDIR="${pkgdir}" install
-
-  install -dm 755 "${pkgdir}"/usr/share/plank/themes
-  ln -s /usr/share/themes/Adapta/plank "${pkgdir}"/usr/share/plank/themes/Adapta
 }
 
 # vim: ts=2 sw=2 et:

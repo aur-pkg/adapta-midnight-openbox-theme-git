@@ -1,0 +1,32 @@
+#!/bin/sh -
+
+ROOT="$( pwd )"
+SRC_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+OUT_DIR="${SRC_DIR}/build"
+
+mkdir -p ${OUT_DIR}
+
+cp PKGBUILD ${OUT_DIR}/
+
+###
+# make package
+###
+cd ${OUT_DIR}
+makepkg -Acs
+
+###
+# cleanup build dir
+###
+rm -rf adapta-midnight
+rm -rf src
+rm PKGBUILD
+
+DIST_FILE="$( \
+ls | grep -o '[^.]*\.pkg\.tar\.xz' \
+   | grep -v ./ \
+   | tail -1 \
+)"
+
+echo "Installing Package file: ${DIST_FILE}"
+
+sudo pacman -U "${DIST_FILE}"
